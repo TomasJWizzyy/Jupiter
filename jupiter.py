@@ -133,7 +133,9 @@ class Moons:
         
         # creating a linear regression model
         from sklearn import linear_model
-        model = linear_model.LinearRegression(fit_intercept=True)
+        
+        # changing the hyperparemeter so that the line is forced through the origin, as a distance of 0 wpuld cause period to be 0
+        model = linear_model.LinearRegression(fit_intercept=False)
         
         # training the data
         model.fit(x_train, y_train)
