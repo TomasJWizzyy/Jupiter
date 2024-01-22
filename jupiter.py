@@ -51,3 +51,36 @@ class Moons:
                 
         else:
             print("One of the chosen variables does not exist")
+            
+            
+    # plots the distribution between groups for any selected variable
+    def dis_plot(self, variable, group, separate):
+        
+
+            
+        if variable in self.data.columns and group in self.data.columns:
+            
+            # the graph can either be plotted seperatley for each group or into one graph
+            if separate == "yes":
+                
+                sns.displot(x=variable, data=self.data, hue=group, multiple="stack", col=group, col_wrap=3, height=4)
+                
+                plt.xlabel(variable)
+                
+                
+                plt.show()
+                
+            elif separate == "no":
+                    
+                sns.displot(x=variable, data=self.data, hue=group, multiple="stack")
+                
+                plt.xlabel(variable)
+                
+                
+                plt.show()
+                            
+            else:
+                print("Please enter 'yes' or 'no'")
+                
+        else:
+            print("One of the chosen variables does not exist")
