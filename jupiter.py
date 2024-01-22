@@ -84,3 +84,31 @@ class Moons:
                 
         else:
             print("One of the chosen variables does not exist")
+            
+            
+    # prints off all data for a specific selected moon
+    def specific_moon(self, name):
+        
+
+            
+        if name in self.data.index or name in self.data.columns:
+            # locates the row at which the selected moon is on
+            moon_data = self.data.loc[name]
+                
+            return moon_data
+        
+        else:
+            print("Moon not in database")
+    
+    # allows for a specific data point to be selected for a specified moon
+    def specific_data(self, name, attribute):
+        if name in self.data.index or name in self.data.columns:
+            moon_data = self.data.loc[name]
+            
+            # creating a dictionary of each data attribute
+            attributes = {"Period": moon_data["period_days"], "Distance": moon_data["distance_km"],
+                         "Radius": moon_data["radius_km"], "Magnitude": moon_data["mag"],
+                         "Mass": moon_data["mass_kg"], "Group": moon_data["group"],
+                         "Eccentricity": moon_data["ecc"], "Inclination": moon_data["inclination_deg"]}
+            
+            print(f"{name}'s {attribute} is {attributes[attribute]}")
