@@ -20,3 +20,15 @@ class Moons:
         
         # changes sets the index of the table to the moon name
         self.data = self.data.set_index("moon")
+        
+    
+    # prints of a statistical summary of the data    
+    def summary(self):
+        
+        return self.data.describe()
+
+    # prints the correlation between each variable in the data        
+    def correlations(self):
+        
+
+        return self.data.corr()
