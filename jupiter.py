@@ -32,3 +32,22 @@ class Moons:
         
 
         return self.data.corr()
+    
+    
+    # allows for each variable to be plotted against each other. allows for them to be selected as required.        
+    def scatter_plot(self, X, Y):
+        
+
+        # checks if the input is correct    
+        if X in self.data.columns and Y in self.data.columns:
+            
+            # plots the desired graph depending on user input
+            sns.scatterplot(x=X, y=Y, data=self.data)
+            plt.title(f"{Y} against {X}")
+            plt.xlabel(X)
+            plt.ylabel(Y)
+                
+            plt.show()
+                
+        else:
+            print("One of the chosen variables does not exist")
