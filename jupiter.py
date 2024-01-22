@@ -112,3 +112,46 @@ class Moons:
                          "Eccentricity": moon_data["ecc"], "Inclination": moon_data["inclination_deg"]}
             
             print(f"{name}'s {attribute} is {attributes[attribute]}")
+            
+            
+    def jupiter_mass(self):
+        
+        # gravitational constant G used in keplers third law
+        G =  6.67*(10**-11)
+
+        # creates new columns in the data with the necessary unit conversions for keplers third law
+        self.data["t_squared"] = (self.data["period_days"]*24*60*60)**2
+        self.data["a_cubed"] = (self.data["distance_km"]*1000)**3
+        
+        # assigns the two new columns to new variable names
+        X = self.data[["a_cubed"]]
+        Y = self.data["t_squared"]
+        
+        #splits 30% of data into testing and the other 70% for training. this is done to see how well the model fits with new data
+        from sklearn.model_selection import train_test_split
+        x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 42)
+        
+        # creating a linear regression model
+        from sklearn import linear_model
+        model = linear_model.LinearRegression(fit_intercept=True)
+        
+        # training the data
+        model.fit(x_train, y_train)
+        # using the test data to make predictions
+        pred = model.predict(x_test)
+        
+        # plotting a cubed against t squared
+        sns.relplot(data=self.data, x="a_cubed", y="t_squared")
+        
+        # defining the gradient of the regression model
+        gradient = model.coef_[0]
+        
+        # using the data and rearranging keplers law to find a mass value
+        mass = (4*np.pi**2)/(G*gradient)
+        
+        print(mass)
+        
+        from sklearn.metrics import r2_score, mean_squared_error
+        
+        # calculates how well the real data fits the predicted data
+        print(f"r2_score is {r2_score(y_test, pred)}")
