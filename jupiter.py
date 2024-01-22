@@ -143,6 +143,9 @@ class Moons:
         # plotting a cubed against t squared
         sns.relplot(data=self.data, x="a_cubed", y="t_squared")
         
+        # plots the predicted regression line
+        plt.plot(x_test, pred, color='orange', linewidth = 0.5)
+        
         # defining the gradient of the regression model
         gradient = model.coef_[0]
         
