@@ -84,10 +84,10 @@ class Moons:
             moon_data = self.data.loc[name]
             
             # creating a dictionary of each data attribute
-            attributes = {"Period": moon_data["period_days"], "Distance": moon_data["distance_km"],
-                         "Radius": moon_data["radius_km"], "Magnitude": moon_data["mag"],
-                         "Mass": moon_data["mass_kg"], "Group": moon_data["group"],
-                         "Eccentricity": moon_data["ecc"], "Inclination": moon_data["inclination_deg"]}
+            attributes = {"period_days": moon_data["period_days"], "distance_km": moon_data["distance_km"],
+                         "radius_km": moon_data["radius_km"], "mag": moon_data["mag"],
+                         "mass_kg": moon_data["mass_kg"], "group": moon_data["group"],
+                         "ecc": moon_data["ecc"], "inclination_deg": moon_data["inclination_deg"]}
             
             print(f"{name}'s {attribute} is {attributes[attribute]}")
             
@@ -122,7 +122,7 @@ class Moons:
         
         # plotting a cubed against t squared
         sns.relplot(data=self.data, x="a_cubed", y="t_squared")
-        
+        plt.title("T_squared against a_cubed")
         # plots the predicted regression line
         plt.plot(x_test, pred, color='orange', linewidth = 0.5)
         
