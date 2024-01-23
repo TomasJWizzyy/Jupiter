@@ -54,36 +54,14 @@ class Moons:
             
             
     # plots the distribution between groups for any selected variable
-    def dis_plot(self, variable, group, separate):
+    
+    def dis_plot(self, variable, k):
         
-
-            
-        if variable in self.data.columns and group in self.data.columns:
-            
-            # the graph can either be plotted seperatley for each group or into one graph
-            if separate == "yes":
-                
-                sns.displot(x=variable, data=self.data, hue=group, multiple="stack", col=group, col_wrap=3, height=4)
-                
-                plt.xlabel(variable)
-                
-                
-                plt.show()
-                
-            elif separate == "no":
-                    
-                sns.displot(x=variable, data=self.data, hue=group, multiple="stack")
-                
-                plt.xlabel(variable)
-                
-                
-                plt.show()
-                            
-            else:
-                print("Please enter 'yes' or 'no'")
-                
-        else:
-            print("One of the chosen variables does not exist")
+        # k can change depending on what type of graph is desired
+        sns.catplot(data=self.data, x="group", y=variable, kind=k)
+        plt.title
+        plt.show
+   
             
             
     # prints off all data for a specific selected moon
@@ -91,7 +69,7 @@ class Moons:
         
 
             
-        if name in self.data.index or name in self.data.columns:
+        if name in self.data.index:
             # locates the row at which the selected moon is on
             moon_data = self.data.loc[name]
                 
@@ -102,7 +80,7 @@ class Moons:
     
     # allows for a specific data point to be selected for a specified moon
     def specific_data(self, name, attribute):
-        if name in self.data.index or name in self.data.columns:
+        if name in self.data.index:
             moon_data = self.data.loc[name]
             
             # creating a dictionary of each data attribute
